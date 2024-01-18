@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Student</title>
+</head>
+<body>
+
+<div class="my_block">
+    <h1>Заголовок</h1>
+    <h2>Заголовок</h2>
+    <h3>Заголовок</h3>
+    <h4>Заголовок</h4>
+    <h5>Заголовок</h5>
+    <h6>Заголовок</h6>
+    <h7>Заголовок</h7>
+</div>
+
+
+
+<p>Текст текст текст текст текст текст текст текст текст текст текст текст текст
+    текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+</p>
+
+
+<h2> Табличний варіант відображення даних </h2>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>firstName</th>
+        <th>lastName</th>
+        <th>age</th>
+        <th>phone</th>
+        <th>email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Вася</td>
+        <td>Пупкін</td>
+        <td>18</td>
+        <td>+380501112233</td>
+        <td>v1@ukr.net</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Іван</td>
+        <td>Пупкін</td>
+        <td>19</td>
+        <td>+380502212233</td>
+        <td>v2@ukr.net</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h2> Відображення даних у вигляді списку</h2>
+<ul>
+    <li>Java</li>
+    <li>C#</li>
+    <li>JavaScript</li>
+</ul>
+
+<h2> Підключення картинки </h2>
+<img src="user1.jpg" alt="user">
+
+<h2> Робота з формою </h2>
+<form method="post" action="/">
+
+    <label for="firstname">Ім'я</label>
+    <input type="text" name="firstname" id="firstname" placeholder="Введіть ім'я">
+
+    <br>
+    <label for="lastname">Прізвище</label>
+    <input type="text" name="lastname" id="lastname" placeholder="Введіть прізвище">
+    <hr>
+    <input type="submit" value="Додати">
+
+    <br>
+    <hr>
+    <select name="job">
+        <option value="student">Студент</option>
+        <option value="teacher">Викладач</option>
+        <option value="teacher">Розробник</option>
+    </select>
+    <br>
+    <hr>
+    <select name="job2" multiple>
+        <option value="student">Студент</option>
+        <option value="teacher">Викладач</option>
+        <option value="teacher">Розробник</option>
+    </select>
+
+    <br>
+    <hr>
+
+    <input type="radio" name="asd" value="f">Жінка</input>
+    <input type="radio" name="asd" value="m">Чоловік</input>
+
+    <br>
+    <hr>
+    <label for="age">Вік</label>
+    <input type="number" id="age" name="age" min="0" max="120" step="1" value="1">
+
+</form>
+
+</body>
+</html>

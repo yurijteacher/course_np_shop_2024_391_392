@@ -1,0 +1,2 @@
+INSERT INTO `category` (`description`, `image`, `name`) VALUES ('qwe wqe qwe qwe', '/static/images/air.jpg', 'macbook air');
+INSERT INTO `category` (`description`, `image`, `name`) VALUES ('asd wqe qwe asd', '/static/images/pro.jpg', 'macbook pro');

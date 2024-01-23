@@ -3,6 +3,8 @@
 
     <h2> Кошик товарів</h2>
 
+    <#if cart??>
+
     <table class="table table-striped">
         <thead>
         <tr>
@@ -19,7 +21,6 @@
         </thead>
         <tbody>
 
-        <#if cart??>
             <#list cart as item>
                 <tr>
                     <th><img src="${item.product.image}" height="25px" alt="${item.product.name}"></th>
@@ -51,11 +52,14 @@
     <h5><b><i> Вартість купівлі продукції: [ ${total} ] </i></b></h5>
     <h5><b><i> Кількість позицій у кошику: [ ${sum} ] </i></b></h5>
 
-    <h6> Очистити кошик </h6>
+    <h6> <form action="/deleteAllProductFromCart" method="post">
+            <button class="btn btn-primary bi bi-1-square" type="submit"> Очистити кошик </button>
+        </form>
+    </h6>
 
     <h6> <a href="/category"> Повернутись до каталогу </a></h6>
 
-    <h6> Оформлення замовлення </h6>
+    <h6> <a href="/login"> Оформлення замовлення </a></h6>
 
 
 </@p.page>

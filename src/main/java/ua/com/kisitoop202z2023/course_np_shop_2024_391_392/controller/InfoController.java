@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.entity.Category;
+import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.repository.ProductRepository;
 import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.service.CategoryService;
 import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.service.ProductService;
 
@@ -15,6 +17,7 @@ public class InfoController {
 
     private final CategoryService categoryService;
     private final ProductService productService;
+    private final ProductRepository productRepository;
 
     @GetMapping("/payment")
     public String getPagePayment(){
@@ -53,6 +56,15 @@ public class InfoController {
         model.addAttribute("productByCategory", productService.findProductsByCategory(category));
 
         return "products";
+    }
+
+    @GetMapping("/search")
+    public String getPageResultSearchProductByName(@RequestParam(name = "search") String name,
+                                                   Model model){
+
+        model.addAttribute("productByName", productRepository.findAllByNameContainsIgnoreCaseOrderByName(name));
+
+        return "search";
     }
 
 

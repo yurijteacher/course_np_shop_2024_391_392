@@ -11,7 +11,7 @@
             <div class="card">
                 <a href="/category/${category.id}">
                 <img src="${category.image}" class="card-img-top" alt="user">
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h5 class="card-title">${category.name}</h5>
                     <p class="card-text">${category.description}</p></div>
                 </a>

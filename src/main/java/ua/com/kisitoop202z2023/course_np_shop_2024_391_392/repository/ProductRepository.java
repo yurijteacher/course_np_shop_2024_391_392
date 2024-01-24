@@ -9,4 +9,10 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findAllByCategories(Category category);
+
+    // пошук по словам
+    List<Product> findAllByNameOrderByName(String name);
+
+    // пошук по буквам!!!
+    List<Product> findAllByNameContainsIgnoreCaseOrderByName(String name);
 }

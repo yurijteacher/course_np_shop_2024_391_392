@@ -21,8 +21,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/info">Про компанію</a>
                 </li>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Пошук товарів" aria-label="Search">
+                <form class="d-flex" role="search" method="get" action="/search">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Пошук товарів" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Пошук</button>
                 </form>
             </ul>

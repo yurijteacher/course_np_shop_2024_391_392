@@ -23,6 +23,8 @@ public class Order {
     private Long id;
     private Date dateCreated;
     private boolean statusOrder;
+    private String delivery;
+    private String payment;
 
 
     @ManyToOne

@@ -1,5 +1,7 @@
 package ua.com.kisitoop202z2023.course_np_shop_2024_391_392.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.entity.Category;
 import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.entity.Product;
@@ -15,4 +17,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     // пошук по буквам!!!
     List<Product> findAllByNameContainsIgnoreCaseOrderByName(String name);
+
+    Page<Product> findAllByCategories(Pageable pageable, Category category);
 }

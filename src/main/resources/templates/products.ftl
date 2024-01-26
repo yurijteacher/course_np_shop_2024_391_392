@@ -2,11 +2,14 @@
 <@p.page>
     <h2> Список продукції</h2>
 
+    <#import "templ/pager.ftl" as c>
+
+    <@c.pager url page/>
 
     <div class="row row-cols-2 row-cols-md-3 g-4">
 
-        <#if productByCategory??>
-            <#list productByCategory as product>
+        <#if page.content??>
+            <#list page.content as product>
 
                 <form action="/addItemToCart" method="post">
                 <div class="col">

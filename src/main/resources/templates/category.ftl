@@ -2,11 +2,18 @@
 <@p.page>
     <h2> Список категорій продукції</h2>
 
+    <#import "templ/pager.ftl" as c>
+
+
+    <@c.pager url page/>
 
     <div class="row row-cols-2 row-cols-md-2 g-4">
 
-        <#if categories??>
-        <#list categories as category>
+
+<#--        <#if categories??>-->
+<#--        <#list categories as category>-->
+        <#if page.content??>
+        <#list page.content as category>
         <div class="col">
             <div class="card">
                 <a href="/category/${category.id}">
@@ -20,6 +27,8 @@
         </#list>
         </#if>
     </div>
+
+    <@c.pager url page/>
 
 
 </@p.page>

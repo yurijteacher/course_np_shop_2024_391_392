@@ -1,17 +1,31 @@
 package ua.com.kisitoop202z2023.course_np_shop_2024_391_392.controller;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.service.CategoryService;
 
 @Controller
+@RequiredArgsConstructor
 public class TestController {
 
-    @GetMapping("/")
-    public String getPageHome(Model model){
+    private final CategoryService categoryService;
 
-        model.addAttribute("hello", "Hello Student!!!");
-        return "index";
+    @GetMapping("/")
+    public String getPageHome(Model model,
+                              @PageableDefault(sort = {"id"},
+                                      direction = Sort.Direction.ASC, size = 2)
+                              Pageable pageable
+    ){
+
+        model.addAttribute("page", categoryService.getPageElCategory(pageable));
+
+        model.addAttribute("url", "/category");
+        return "category";
     }
 
 

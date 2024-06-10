@@ -1,13 +1,16 @@
 package ua.com.kisitoop202z2023.course_np_shop_2024_391_392.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.entity.Users;
 import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.repository.UsersRepository;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UsersRepository usersRepository;
 
@@ -44,4 +47,14 @@ public class UserService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        Users users = usersRepository.findByUsername(username);
+        if(users == null) {
+            throw new UsernameNotFoundException("Not found: " + username);
+        }
+
+        return users;
+    }
 }

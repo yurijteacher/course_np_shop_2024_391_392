@@ -4,6 +4,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,13 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.bl.Cart;
 import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.bl.ItemCart;
-import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.entity.Clients;
-import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.entity.Order;
-import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.entity.Product;
-import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.entity.ProductHasOrder;
+import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.entity.*;
 import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.repository.ClientsRepository;
 import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.repository.OrderRepository;
 import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.repository.ProductHasOrderRepository;
+import ua.com.kisitoop202z2023.course_np_shop_2024_391_392.service.UserService;
 
 import java.util.Date;
 
@@ -28,6 +28,7 @@ public class CartController {
     private final ClientsRepository clientsRepository;
     private final OrderRepository orderRepository;
     private final ProductHasOrderRepository productHasOrderRepository;
+    private final UserService userService;
 
     @GetMapping("/cart")
     public String getPageCart(HttpServletRequest request,
@@ -122,10 +123,17 @@ public class CartController {
             cart = new Cart();
         }
 
-        Long id = (Long) session.getAttribute("user");
+
+        // Auth ??
+//        Long id = (Long) session.getAttribute("user");
+
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Users users = (Users) userService.loadUserByUsername(auth.getName());
+
         Clients client = null;
-        if (id != null) {
-            client = clientsRepository.findById(id).get();
+        if (users != null) {
+            client = clientsRepository.findById(users.getId()).get();
         } else {
             client = new Clients();
         }
@@ -158,7 +166,15 @@ public class CartController {
 
         HttpSession session = request.getSession();
 
-        Long id = (Long) session.getAttribute("user");
+//        Long id = (Long) session.getAttribute("user");
+
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Users users = (Users) userService.loadUserByUsername(auth.getName());
+        Long id = users.getId();
+
+
+
         Cart cart = (Cart) session.getAttribute("cart");
 
         if (cart == null) return "redirect:/category";
@@ -178,7 +194,8 @@ public class CartController {
             Order order1 = orderRepository.save(order);
 
             for (ItemCart el : cart.getCart()) {
-                productHasOrderRepository.save(new ProductHasOrder(el.getProduct(), order1, el.getQuantity()));
+                productHasOrderRepository.save(new ProductHasOrder(el.getProduct(),
+                        order1, el.getQuantity()));
             }
 
             cart.deleteAllItemCart();

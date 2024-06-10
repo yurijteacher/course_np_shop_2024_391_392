@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -59,7 +60,10 @@ public class UserController {
         }
 
         // Закріплення ролі за користувачем
-        user.setRolesset(Collections.singleton(new Roles(1L, "ROLE_Users")));
+//        user.setRolesset(Collections.singleton(new Roles(1L, "ROLE_User")));
+
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setRolesset(Collections.singleton(new Roles(1L, "ROLE_User")));
 
         Users user1 = usersRepository.save(user);
         client.setUser(user1);
@@ -69,24 +73,24 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @PostMapping("/login")
-    public String authUser(@RequestParam(name = "username") String username,
-                           @RequestParam(name = "password") String pass,
-                           HttpServletRequest request) {
-
-
-        if(userService.getLogicUserByUsernameAndPassword(username, pass)){
-
-            return "redirect:/login";
-
-        } else {
-
-            Users user = userService.getUserByUsernameAndPassword(username, pass);
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user.getId());
-
-            return "redirect:/order";
-        }
-    }
+//    @PostMapping("/login")
+//    public String authUser(@RequestParam(name = "username") String username,
+//                           @RequestParam(name = "password") String pass,
+//                           HttpServletRequest request) {
+//
+//
+//        if(userService.getLogicUserByUsernameAndPassword(username, pass)){
+//
+//            return "redirect:/login";
+//
+//        } else {
+//
+//            Users user = userService.getUserByUsernameAndPassword(username, pass);
+//            HttpSession session = request.getSession();
+//            session.setAttribute("user", user.getId());
+//
+//            return "redirect:/order";
+//        }
+//    }
 
 }

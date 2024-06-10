@@ -15,5 +15,29 @@ public class TestController {
     }
 
 
+    @GetMapping("/user")
+    public String getUserPage(){
+        return "user-page";
+    }
+
+    @GetMapping("/manager")
+    public String getManagerPage(//Model model
+    ){
+
+//        model.addAttribute("categories", categoryRepository.findAll());
+        return "manager-page";
+    }
+
+    @GetMapping("/admin")
+    public String getPageAdmin(){
+        return "admin-page";
+    }
+
+    @GetMapping("/order-manager")
+    public String getOrderPage(){
+        return "order-page";
+    }
+
+
 
 }

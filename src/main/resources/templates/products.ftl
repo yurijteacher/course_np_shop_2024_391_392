@@ -25,7 +25,6 @@
                                 </p>
                             </div>
                         <button type="submit">Add to Cart</button>
-                        </a>
                     </div>
                 </div>
                 </form>

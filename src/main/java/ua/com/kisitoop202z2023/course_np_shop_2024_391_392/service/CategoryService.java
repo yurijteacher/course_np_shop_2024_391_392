@@ -38,6 +38,27 @@ public class CategoryService {
     }
 
 
+    public List<Category> findAllCategory(){
+        return categoryRepository.findAll();
+    }
+
+    public Category findCategoryById(Long id) {
+        return categoryRepository.findById(id).orElse(null);
+    }
+
+    public Category saveCategory(Category category) {
+        return categoryRepository.save(category);
+    }
+
+    public void deleteCategoryById(Long id) {
+        categoryRepository.deleteById(id);
+    }
+
+    public void updateCategory(Category category) {
+        categoryRepository.save(category);
+    }
+
+
 
 
 }
